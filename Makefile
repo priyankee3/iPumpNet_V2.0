@@ -1,0 +1,21 @@
+#Variable Defination
+CC = cc
+CFLAGS = -Wall -g
+LDFLAGS = -lmodbus
+OBJS = main.o modbus_tcp.o
+
+#Target and its dependencies
+HMI_Backend: $(OBJS)
+	$(CC) $(CFLAGS) -o HMI_Backend $(OBJS) $(LDFLAGS)
+
+#Compile .c to .o
+main.o: main.c
+	$(CC) $(CFLAGS) -c main.c 
+
+modbus_tcp.o: modbus_tcp.c
+	$(CC) $(CFLAGS) -c modbus_tcp.c
+
+#Clean build files
+clean:
+	@echo "cleaning object files and executable file...."
+	@rm -f  *.o HMI_Backend
