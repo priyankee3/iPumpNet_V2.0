@@ -2,6 +2,7 @@
 
 u16 modbus_tcp_buffer[260];
 
+// function to fetch data from MFM
 bool modbus_tcp(const s8* ip, s32 portNo, s32 slaveID, u16 address, u16 size)
 {	
 	// Create new MODBUS TCP FD
@@ -35,13 +36,24 @@ bool modbus_tcp(const s8* ip, s32 portNo, s32 slaveID, u16 address, u16 size)
 		return 0;
 	}
 
-	printf("buffer[0] = 0x%X\n",modbus_tcp_buffer[0]);
+	/*printf("buffer[0] = 0x%X\n",modbus_tcp_buffer[0]);
 	printf("buffer[1] = 0x%X\n",modbus_tcp_buffer[1]);
 	printf("buffer[2] = 0x%X\n",modbus_tcp_buffer[2]);
-	printf("buffer[3] = 0x%X\n",modbus_tcp_buffer[3]);
+	printf("buffer[3] = 0x%X\n",modbus_tcp_buffer[3]);*/
 
 	modbus_close(ctx);
 	modbus_free(ctx);
+
+	return 1;
+}
+
+// Function to store and display data into Float variable
+bool convert_to_F32(void)
+{
+	hex_float.value[0] = modbus_tcp_buffer[1] & 0xFF;
+	hex_float.value[1] = (modbus_tcp_buffer[1] >> 8) & 0xFF;
+	hex_float.value[2] = modbus_tcp_buffer[0] & 0xFF;
+	hex_float.value[3] = (modbus_tcp_buffer[0] >>8) &0xFF;
 
 	return 1;
 }

@@ -22,11 +22,23 @@ typedef double d64;
 extern u16 modbus_tcp_buffer[260];
 
 // Function prototype
-// Fetch data from MFM: IP address, port, slave ID, register address, number of registers
-bool modbus_tcp(const s8 *, s32, s32, u16, u16);
+
+bool modbus_tcp(const s8 *, s32, s32, u16, u16);	// Fetch data from MFM: IP address, port, slave ID, register address, number of registers
+bool convert_to_F32(void);	// Function to convert recevied data and store it into float variable
 
 // Macro
 #define MFM "192.168.1.102"
+#define MFM_PORTNO 502
+#define VR 0x8006
+#define VY 0x8008
+#define VB 0x800A
+#define CR 0x800E
+#define CY 0x8010
+#define CB 0x8012
+#define FRQ 0x800c
+#define PFR 0x8030
+#define PFY 0x8032
+#define PFB 0x8034
 
 // Structure for float/integer conversion
 union convert_hex_float{
