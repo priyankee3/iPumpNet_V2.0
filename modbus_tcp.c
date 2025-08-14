@@ -1,6 +1,6 @@
 #include"header.h"
 
-u16 modbus_tcp_buffer[260];
+u16 modbus_tcp_buffer[256];
 
 // function to fetch data from MFM
 bool modbus_tcp(const s8* ip, s32 portNo, s32 slaveID, u16 address, u16 size)
