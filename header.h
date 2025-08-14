@@ -25,6 +25,7 @@ extern u16 modbus_tcp_buffer[260];
 
 bool modbus_tcp(const s8 *, s32, s32, u16, u16);	// Fetch data from MFM: IP address, port, slave ID, register address, number of registers
 bool convert_to_F32(void);	// Function to convert recevied data and store it into float variable
+void fetch_MFM(void);	// Function to fetching values from MFM EMpro
 
 // Macro
 #define MFM "192.168.1.102"
