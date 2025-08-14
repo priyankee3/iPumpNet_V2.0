@@ -4,9 +4,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include<string.h>
 #include <modbus/modbus.h>
 #include <errno.h>
 #include <stdbool.h>
+#include <sys/socket.h>	// For creating socket
+#include <arpa/inet.h>	// For converting IPs, Port no. to network order
+#include <cjson/cJSON.h>	// For Transmitting and receving data in JSON format  
+#include <pthread.h>	// for thread
 
 // Type definitions
 typedef char s8;
@@ -20,12 +25,13 @@ typedef double d64;
 
 // External buffer
 extern u16 modbus_tcp_buffer[256];
+extern s8 buffer[256];	// For UDP 
 
 // Function prototype
-
 bool modbus_tcp(const s8 *, s32, s32, u16, u16);	// Fetch data from MFM: IP address, port, slave ID, register address, number of registers
 bool convert_to_F32(void);	// Function to convert recevied data and store it into float variable
 void fetch_MFM(void);	// Function to fetching values from MFM EMpro
+void * udp_handle(void * arg);	// Function to handle Client on UDP Server	
 
 // Macro
 #define MFM "192.168.1.102"
@@ -47,6 +53,12 @@ union convert_hex_float{
     f32 result;
 };
 
+// Extern Variables
+extern s8 buffer[256];
+extern s32 sockfd, n;
+extern u32 len;
+extern struct sockaddr_in servaddr, cliaddr;
+extern cJSON *json;	//file descriptor for JSON
 extern union convert_hex_float hex_float;
 
 

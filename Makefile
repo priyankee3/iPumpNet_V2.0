@@ -1,8 +1,8 @@
 #Variable Defination
 CC = cc
 CFLAGS = -Wall -g
-LDFLAGS = -lmodbus
-OBJS = main.o modbus_tcp.o
+LDFLAGS = -lmodbus -lcjson
+OBJS = main.o modbus_tcp.o udp_server.o
 
 #Target and its dependencies
 HMI_Backend: $(OBJS)
@@ -14,6 +14,9 @@ main.o: main.c
 
 modbus_tcp.o: modbus_tcp.c
 	$(CC) $(CFLAGS) -c modbus_tcp.c
+
+udp_server.o: udp_server.c
+	$(CC) $(CFLAGS) -c udp_server.c
 
 #Clean build files
 clean:
