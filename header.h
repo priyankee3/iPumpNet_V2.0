@@ -19,7 +19,7 @@ typedef float f32;
 typedef double d64;
 
 // External buffer
-extern u16 modbus_tcp_buffer[260];
+extern u16 modbus_tcp_buffer[256];
 
 // Function prototype
 
