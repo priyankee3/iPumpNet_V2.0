@@ -111,4 +111,25 @@ void fetch_MFM(void)
 		convert_to_F32();
 		printf("PF Red: %f \t", hex_float.result);
 	}
+	
+	// Power Factor Yellow
+	if(modbus_tcp(MFM, MFM_PORTNO, 1, PFY, 4))
+	{
+		convert_to_F32();
+		printf("PF Yellow: %f \t", hex_float.result);
+	}
+	
+	// Power Factor blue
+	if(modbus_tcp(MFM, MFM_PORTNO, 1, PFB, 4))
+	{
+		convert_to_F32();
+		printf("PF Blue: %f \t", hex_float.result);
+	}
+	
+	// Frequency
+	if(modbus_tcp(MFM, MFM_PORTNO, 1, FRQ, 4))
+	{
+		convert_to_F32();
+		printf("Frequncy: %f \n", hex_float.result);
+	}
 }
