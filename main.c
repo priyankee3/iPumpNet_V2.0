@@ -1,5 +1,9 @@
 /*****************************************************************************************
 1] Fetching data through MFM
+2] Implemented Multi-Threading for using UDP server 
+3] Implemented UDP server to capture Data from Data acquisiton hardware 
+	3.1] Implemented JSON parsing 
+	3.2] 
 *****************************************************************************************/
 
 #include"header.h"
