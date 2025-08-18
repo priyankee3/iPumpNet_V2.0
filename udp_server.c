@@ -31,6 +31,7 @@ void * udp_handle(void * arg)
 		
 		}
 		
+		fetch_MFM();	// Fetching Data from MFM
 
 		sendto(sockfd, "Message received", 16, 0, (const struct sockaddr*)&cliaddr, len);
 	}

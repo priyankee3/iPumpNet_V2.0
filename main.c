@@ -87,7 +87,6 @@ int main()
 
 	while(1)
 	{
-		fetch_MFM();
 		sleep(1);
 	}
 
