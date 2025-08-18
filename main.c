@@ -58,14 +58,14 @@ int main()
 	/******************** File Inialization for .csv ********************/
 	
 	// For log file 
-	fp = fopen("../DataBase/Log.csv", "r+");
+	fp = fopen("../DataBase/Log.csv", "a+");
 	if(fp < 0)
 		perror("File Status:");
 
-	if( (fscanf(fp,"%f, %f, %f, %f, %s \n", &T1, &P1, &T2, &P2, TStamp)) == 0 )
+	if( (fscanf(fp,"%s, %s, %s, %s, %s \n", &T1, &P1, &T2, &P2, TStamp)) == 0 )
 		printf("File is Empty\n");
 	else
-		printf("File is not empty");
+		printf("File is not empty %d\n",fp);
 
 	while(1)
 	{
