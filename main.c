@@ -59,8 +59,8 @@ int main()
 	/******************** File Inialization for .csv ********************/
 	
 	// For log file
-	fd = fopen("../DataBase/Log.csv", "r");
-	if(fd == NULL)
+	fd_log = fopen("../DataBase/Log.csv", "r");
+	if(fd_log == NULL)
 	{
 		printf("File not present\n");
 		write_header = 1;
@@ -68,11 +68,11 @@ int main()
 	else
 	{
 		write_header = 0;
-		fclose(fd);
+		fclose(fd_log);
 	}
 
-	fd = fopen("../DataBase/Log.csv","a");
-	if( fd == NULL )
+	fd_log = fopen("../DataBase/Log.csv","a");
+	if( fd_log == NULL )
 	{
 		perror("File status:");
 		return 1;
@@ -82,8 +82,10 @@ int main()
 	{
 		printf("Entering Header\n");
 		fprintf(fd,"TStamp, Temperature 1, Pressure 1, Temperature 2, Pressure 2, Voltage Red, Voltage Yellow, Voltage Blue, Current Red, Current Yellow, Current Blue, Power Factor Red, Power Factor Yellow, Power Factor Blue, Angle of Voltage Phase 1, Angle of Voltage Phase 2, Angle of Voltage Phase 3\n");
-		fclose(fd);
+		fclose(fd_log);
 	}
+
+	//  For Error log file
 
 	while(1)
 	{
