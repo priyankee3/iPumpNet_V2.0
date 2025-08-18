@@ -68,7 +68,7 @@ extern cJSON *json;	//file descriptor for JSON
 extern union convert_hex_float hex_float;
 extern FILE *fd_log; // file descriptor for no error logs .csv file
 extern FILE *fd_error_log;	// file descriptor for error log .csv file
-extern f32 T1, P1, T2, P2, vR, vY, vB, cR, cY, cB, frq, pfR, pfY, pfB, avi1, avi2, avi3, avP1, avP2, avP3;	// Variables for Temperature 1, 2 and Pressure 1, 2
+extern f32 T1, P1, T2, P2, vR, vY, vB, cR, cY, cB, frq, pfR, pfY, pfB, avi1, avi2, avi3, avP1, avP2, avP3;	// Variables for Temperature 1, 2 and Pressure 1, 2 and values from MFM 
 extern s8 *TStamp;	// Variable for storing Time stamp
 
 #endif

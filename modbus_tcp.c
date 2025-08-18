@@ -1,6 +1,7 @@
 #include"header.h"
 
 u16 modbus_tcp_buffer[256];
+f32 vR;
 
 // function to fetch data from MFM
 bool modbus_tcp(const s8* ip, s32 portNo, s32 slaveID, u16 address, u16 size)
@@ -66,6 +67,7 @@ void fetch_MFM(void)
 	{
 		convert_to_F32();
 		printf("VR: %f V\t",hex_float.result);
+		vR = hex_float.result;
 	}
 
 	// Voltage Yellow
