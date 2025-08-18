@@ -8,17 +8,23 @@
 
 #include"header.h"
 
+// Extern Variable declaration
 union convert_hex_float hex_float;
 
 s8 buffer[256];
 s32 sockfd ,  n;
 struct sockaddr_in servaddr, cliaddr;
 cJSON *json = NULL;	//file descriptor for JSON
+FILE *fp = NULL;	//file pointer for .csv file
+f32 T1, P1, T2, P2;	// Variables for Temperature 1, 2 and Pressure 1, 2
+s8 *TStamp = NULL;	// Variable for storing Time stamp
 
 int main()
 {
 	pthread_t tid;	// for Creating thread and getting thread id
 	
+	/******************** IP and Port Initialization for communication ********************/
+
 	// Create Socket
 	sockfd = socket(AF_INET, SOCK_DGRAM, 0);	// Socket Created for IPv4 , UDP
 	if(sockfd < 0)
@@ -41,12 +47,26 @@ int main()
 
 	printf("UDP server listening on port 10051.....\n");
 	
+	/******************** Thread Initialization ********************/
+	
 	//  Creating Thread for UPD
 	if(pthread_create(&tid, NULL, udp_handle, NULL) != 0)
 		close(sockfd);
 	
 	pthread_detach(tid);	// no need to Join
 	
+	/******************** File Inialization for .csv ********************/
+	
+	// For log file 
+	fp = fopen("../DataBase/Log.csv", "r+");
+	if(fp < 0)
+		perror("File Status:");
+
+	if( (fscanf(fp,"%f, %f, %f, %f, %s \n", &T1, &P1, &T2, &P2, TStamp)) == 0 )
+		printf("File is Empty\n");
+	else
+		printf("File is not empty");
+
 	while(1)
 	{
 		fetch_MFM();

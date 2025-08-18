@@ -60,6 +60,8 @@ extern u32 len;
 extern struct sockaddr_in servaddr, cliaddr;
 extern cJSON *json;	//file descriptor for JSON
 extern union convert_hex_float hex_float;
-
+extern FILE *fp; // file for .csv file
+extern f32 T1, P1, T2, P2;	// Variables for Temperature 1, 2 and Pressure 1, 2
+extern s8 *TStamp;	// Variable for storing Time stamp
 
 #endif
