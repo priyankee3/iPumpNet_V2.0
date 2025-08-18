@@ -46,6 +46,12 @@ void * udp_handle(void * arg);	// Function to handle Client on UDP Server
 #define PFR 0x8030
 #define PFY 0x8032
 #define PFB 0x8034
+#define AVI1 0x8045
+#define AVI2 0x8047
+#define AVI3 0x8049
+#define AVP1 0x8051
+#define AVP2 0x8053
+#define AVP3 0x8055
 
 // Structure for float/integer conversion
 union convert_hex_float{
@@ -60,8 +66,8 @@ extern u32 len;
 extern struct sockaddr_in servaddr, cliaddr;
 extern cJSON *json;	//file descriptor for JSON
 extern union convert_hex_float hex_float;
-extern FILE *fp; // file for .csv file
-extern f32 T1, P1, T2, P2;	// Variables for Temperature 1, 2 and Pressure 1, 2
+extern FILE *fd_log; // file for .csv file
+extern f32 T1, P1, T2, P2, vR, vY, vB, cR, cY, cB, frq, pfR, pfY, pfB, avi1, avi2, avi3, avP1, avP2, avP3;	// Variables for Temperature 1, 2 and Pressure 1, 2
 extern s8 *TStamp;	// Variable for storing Time stamp
 
 #endif

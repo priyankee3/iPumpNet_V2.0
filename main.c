@@ -15,7 +15,7 @@ s8 buffer[256];
 s32 sockfd ,  n;
 struct sockaddr_in servaddr, cliaddr;
 cJSON *json = NULL;	//file descriptor for JSON
-FILE *fp = NULL;	//file pointer for .csv file
+FILE *fd = NULL;	//file pointer for .csv file
 f32 T1, P1, T2, P2;	// Variables for Temperature 1, 2 and Pressure 1, 2
 s8 *TStamp = NULL;	// Variable for storing Time stamp
 
@@ -59,8 +59,8 @@ int main()
 	/******************** File Inialization for .csv ********************/
 	
 	// For log file
-	fp = fopen("../DataBase/Log.csv", "r");
-	if(fp == NULL)
+	fd = fopen("../DataBase/Log.csv", "r");
+	if(fd == NULL)
 	{
 		printf("File not present\n");
 		write_header = 1;
@@ -68,11 +68,11 @@ int main()
 	else
 	{
 		write_header = 0;
-		fclose(fp);
+		fclose(fd);
 	}
 
-	fp = fopen("../DataBase/Log.csv","a");
-	if( fp == NULL )
+	fd = fopen("../DataBase/Log.csv","a");
+	if( fd == NULL )
 	{
 		perror("File status:");
 		return 1;
@@ -80,7 +80,9 @@ int main()
 	
 	if(write_header)
 	{
-		fprintf(fp,"%s %s %s %s %s\n","TStamp", "Temperature 1", "Pressure 1", "Temperature 2", "Pressure 2");
+		printf("Entering Header\n");
+		fprintf(fd,"TStamp, Temperature 1, Pressure 1, Temperature 2, Pressure 2, Voltage Red, Voltage Yellow, Voltage Blue, Current Red, Current Yellow, Current Blue, Power Factor Red, Power Factor Yellow, Power Factor Blue, Angle of Voltage Phase 1, Angle of Voltage Phase 2, Angle of Voltage Phase 3\n");
+		fclose(fd);
 	}
 
 	while(1)

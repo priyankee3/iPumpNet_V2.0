@@ -26,6 +26,9 @@ void * udp_handle(void * arg)
 			printf("Temperature T2:%f\t",cJSON_GetObjectItem(json,"T2")->valuedouble);
 			printf("Pressure P2:%f\t",cJSON_GetObjectItem(json,"P2")->valuedouble);
 			printf("Date & Time:%s\n",cJSON_GetObjectItem(json,"TStamp")->valuestring);
+			
+			//fprintf("");
+		
 		}
 		
 
