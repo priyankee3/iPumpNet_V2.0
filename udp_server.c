@@ -33,11 +33,12 @@ void * udp_handle(void * arg)
 		
 		fetch_MFM();	// Fetching Data from MFM
 		
-		fd_log = fopen("../DataBase/Log.csv", "r");
+		fd_log = fopen("../DataBase/Log.csv", "a");
 		if( fd_log < 0 )
 			perror("File Status:");
 		
-		fprintf(fd_log,"%s, %f, %f, %f, %f,",TStamp, T1, P1, T2, P2);
+		fprintf(fd_log,"%s, %f, %f, %f, %f\n",TStamp, T1, P1, T2, P2);
+		fclose(fd_log);
 		sendto(sockfd, "Message received", 16, 0, (const struct sockaddr*)&cliaddr, len);
 	}
 }
