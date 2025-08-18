@@ -21,6 +21,7 @@ s8 *TStamp = NULL;	// Variable for storing Time stamp
 
 int main()
 {
+	bool write_header = 1;	// Variable to write header or not
 	pthread_t tid;	// for Creating thread and getting thread id
 	
 	/******************** IP and Port Initialization for communication ********************/
@@ -57,15 +58,27 @@ int main()
 	
 	/******************** File Inialization for .csv ********************/
 	
-	// For log file 
-	fp = fopen("../DataBase/Log.csv", "a+");
-	if(fp < 0)
-		perror("File Status:");
-
-	if( (fscanf(fp,"%s, %s, %s, %s, %s \n", &T1, &P1, &T2, &P2, TStamp)) == 0 )
-		printf("File is Empty\n");
+	// For log file
+	fp = fopen("../DataBase/Log.csv", "r");
+	if(fp == NULL)
+		write_header = 1;
 	else
-		printf("File is not empty %d\n",fp);
+	{
+		write_header = 0;
+		fclose(fp);
+	}
+
+	fp = fopen("../DataBase/Log.csv","a");
+	if( fp == NULL )
+	{
+		perror("File status:");
+		return 1;
+	}
+	
+	if(write_header)
+	{
+		fprintf(fp,"TStamp, Temperature 1, Pressure 1, Temperature 2, Pressure 2\n");
+	}
 
 	while(1)
 	{
