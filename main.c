@@ -61,7 +61,10 @@ int main()
 	// For log file
 	fp = fopen("../DataBase/Log.csv", "r");
 	if(fp == NULL)
+	{
+		printf("File not present\n");
 		write_header = 1;
+	}
 	else
 	{
 		write_header = 0;
@@ -77,7 +80,7 @@ int main()
 	
 	if(write_header)
 	{
-		fprintf(fp,"TStamp, Temperature 1, Pressure 1, Temperature 2, Pressure 2\n");
+		fprintf(fp,"%s %s %s %s %s\n","TStamp", "Temperature 1", "Pressure 1", "Temperature 2", "Pressure 2");
 	}
 
 	while(1)
