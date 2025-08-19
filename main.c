@@ -15,7 +15,7 @@ s8 buffer[256];
 s32 sockfd ,  n;
 struct sockaddr_in servaddr, cliaddr;
 cJSON *json = NULL;	//file descriptor for JSON
-FILE *fd = NULL;	//file pointer for .csv file
+FILE *fd_error_log = NULL;	//file pointer for .csv file
 f32 T1, P1, T2, P2;	// Variables for Temperature 1, 2 and Pressure 1, 2
 s8 *TStamp = NULL;	// Variable for storing Time stamp
 
@@ -85,7 +85,32 @@ int main()
 	}
 
 	//  For Error log file
+	fd_error_log = fopen("../DataBase/Error_log.csv", "r");
+	if(fd_error_log <= 0)
+	{
+		printf("Error File is not Present \n");
+		write_header = 1;
+	}
+	else
+	{
+		write_header = 0;
+		fclose(fd_error_log);
+	}
 
+	fd_error_log = fopen("../DataBase/Error_log.csv", "a");
+	if( fd_error_log <= 0 )
+	{
+		perror("Error log file status:");
+		return 1;
+	}
+	
+	if(write_header)
+	{
+		fprintf(fd_log,"TStamp, Temperature 1, Pressure 1, Temperature 2, Pressure 2, Voltage Red, Voltage Yellow, Voltage Blue, Current Red, Current Yellow, Current Blue, Frequcency, Power Factor Red, Power Factor Yellow, Power Factor Blue, Angle of Voltage Phase 1, Angle of Voltage Phase 2, Angle of Voltage Phase 3\n");
+		fclose(fd_log);
+	}
+	
+	// Super Loop
 	while(1)
 	{
 		sleep(1);

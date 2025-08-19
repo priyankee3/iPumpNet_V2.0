@@ -1,7 +1,7 @@
 #include"header.h"
 
 u16 modbus_tcp_buffer[256];
-f32 vR;
+f32 vR,vY,vB,cR,cY,cB,frq,pfR,pfY,pfB;
 
 // function to fetch data from MFM
 bool modbus_tcp(const s8* ip, s32 portNo, s32 slaveID, u16 address, u16 size)
@@ -75,6 +75,7 @@ void fetch_MFM(void)
 	{
 		convert_to_F32();
 		printf("VY: %f V\t",hex_float.result);
+		vY = hex_float.result;
 	}
 
 	// Voltage Green
@@ -82,6 +83,7 @@ void fetch_MFM(void)
 	{
 		convert_to_F32();
 		printf("VB: %f V\t",hex_float.result);
+		vB = hex_float.result;
 	}
 
 	// Current Red
@@ -89,6 +91,7 @@ void fetch_MFM(void)
 	{
 		convert_to_F32();
 		printf("CR: %f A\t",hex_float.result);
+		cR = hex_float.result;
 	}
 
 	// Current Yellow
@@ -96,6 +99,7 @@ void fetch_MFM(void)
 	{
 		convert_to_F32();
 		printf("CY: %f A\t",hex_float.result);
+		cY = hex_float.result;
 	}
 
 	// Current Blue
@@ -103,6 +107,7 @@ void fetch_MFM(void)
 	{
 		convert_to_F32();
 		printf("CB: %f A\t",hex_float.result);
+		cB = hex_float.result;
 	}
 
 	printf("\n");
@@ -112,6 +117,7 @@ void fetch_MFM(void)
 	{
 		convert_to_F32();
 		printf("PF Red: %f \t", hex_float.result);
+		pfR = hex_float.result;
 	}
 	
 	// Power Factor Yellow
@@ -119,6 +125,7 @@ void fetch_MFM(void)
 	{
 		convert_to_F32();
 		printf("PF Yellow: %f \t", hex_float.result);
+		pfY = hex_float.result;
 	}
 	
 	// Power Factor blue
@@ -126,6 +133,7 @@ void fetch_MFM(void)
 	{
 		convert_to_F32();
 		printf("PF Blue: %f \t", hex_float.result);
+		pfB = hex_float.result;
 	}
 	
 	// Frequency
@@ -133,6 +141,7 @@ void fetch_MFM(void)
 	{
 		convert_to_F32();
 		printf("Frequncy: %f \t", hex_float.result);
+		frq = hex_float.result;
 	}
 
 	// Angle between Voltage and Current 1
