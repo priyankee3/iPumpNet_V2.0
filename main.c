@@ -80,7 +80,7 @@ int main()
 	
 	if(write_header)
 	{
-		fprintf(fd_log,"TStamp, Temperature 1, Pressure 1, Temperature 2, Pressure 2, Voltage Red, Voltage Yellow, Voltage Blue, Current Red, Current Yellow, Current Blue, Frequcency, Power Factor Red, Power Factor Yellow, Power Factor Blue, Angle of Voltage Phase 1, Angle of Voltage Phase 2, Angle of Voltage Phase 3\n");
+		fprintf(fd_log,"TStamp, Temperature 1, Pressure 1, Temperature 2, Pressure 2, Voltage Red, Voltage Yellow, Voltage Blue, Current Red, Current Yellow, Current Blue, Frequency, Power Factor Red, Power Factor Yellow, Power Factor Blue, Angle of Voltage Phase 1, Angle of Voltage Phase 2, Angle of Voltage Phase 3\n");
 		fclose(fd_log);
 	}
 
@@ -106,7 +106,7 @@ int main()
 	
 	if(write_header)
 	{
-		fprintf(fd_log,"TStamp, Temperature 1, Pressure 1, Temperature 2, Pressure 2, Voltage Red, Voltage Yellow, Voltage Blue, Current Red, Current Yellow, Current Blue, Frequcency, Power Factor Red, Power Factor Yellow, Power Factor Blue, Angle of Voltage Phase 1, Angle of Voltage Phase 2, Angle of Voltage Phase 3\n");
+		fprintf(fd_log,"TStamp, Temperature 1, Pressure 1, Temperature 2, Pressure 2, Voltage Red, Voltage Yellow, Voltage Blue, Current Red, Current Yellow, Current Blue, Frequency, Power Factor Red, Power Factor Yellow, Power Factor Blue, Angle of Voltage Phase 1, Angle of Voltage Phase 2, Angle of Voltage Phase 3\n");
 		fclose(fd_log);
 	}
 	
