@@ -61,10 +61,7 @@ int main()
 	// For log file
 	fd_log = fopen("../DataBase/Log.csv", "r");
 	if(fd_log == NULL)
-	{
-		printf("File not present\n");
 		write_header = 1;
-	}
 	else
 	{
 		write_header = 0;
@@ -87,10 +84,7 @@ int main()
 	//  For Error log file
 	fd_error_log = fopen("../DataBase/Error_log.csv", "r");
 	if(fd_error_log <= 0)
-	{
-		printf("Error File is not Present \n");
 		write_header = 1;
-	}
 	else
 	{
 		write_header = 0;
