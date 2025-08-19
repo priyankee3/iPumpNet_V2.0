@@ -7,6 +7,6 @@
 	For complile using link library manually using -lmodbus
 
 2] Install cJSON library to compile
-	sudo apt install cJSON-dev
+	sudo apt install libcjson-dev
 
 	For compile using link library manually using -cjson
