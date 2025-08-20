@@ -144,45 +144,5 @@ void fetch_MFM(void)
 		frq = hex_float.result;
 	}
 
-	// Angle between Voltage and Current 1
-	if(modbus_tcp(MFM, MFM_PORTNO, 1, AVI1, 4))
-	{
-		convert_to_F32();
-		printf("AVI 1: %f \t", hex_float.result);
-	}
-	
-	// Angle between Voltage and Current 2
-	if(modbus_tcp(MFM, MFM_PORTNO, 1, AVI2, 4))
-	{
-		convert_to_F32();
-		printf("AVI 2: %f \t", hex_float.result);
-	}
-	
-	// Angle between Voltage and Current 3
-	if(modbus_tcp(MFM, MFM_PORTNO, 1, AVI3, 4))
-	{
-		convert_to_F32();
-		printf("AVI 3: %f \t", hex_float.result);
-	}
-	
-	// Angle of Voltage Phase 1
-	if(modbus_tcp(MFM, MFM_PORTNO, 1, AVP1, 4))
-	{
-		convert_to_F32();
-		printf("AVP 1: %f \t", hex_float.result);
-	}
-	
-	// Angle of Voltage Phase 2
-	if(modbus_tcp(MFM, MFM_PORTNO, 1, AVP2, 4))
-	{
-		convert_to_F32();
-		printf("AVP 2: %f \t", hex_float.result);
-	}
-	
-	// Angle of Voltage Phase 3
-	if(modbus_tcp(MFM, MFM_PORTNO, 1, AVP3, 4))
-	{
-		convert_to_F32();
-		printf("AVP 3: %f \n", hex_float.result);
-	}
+	// RPM
 }
