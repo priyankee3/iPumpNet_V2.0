@@ -64,7 +64,7 @@ void * udp_handle(void * arg)
 		}
 		else
 		{
-			fd_error_log = fopen("../DataBase/Log.csv", "a");
+			fd_error_log = fopen("../DataBase/Error_log.csv", "a");
 			if( fd_error_log < 0 )
 				perror("File Status:");
 		
