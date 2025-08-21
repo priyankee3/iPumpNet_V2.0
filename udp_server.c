@@ -5,6 +5,7 @@ FILE *fd_log = NULL;
 // Function to handle the UDP clients
 void * udp_handle(void * arg)	
 {
+	bool log_file = 1;	// variable to select data will go in which file
 	len = sizeof(cliaddr);
 	while(1)
 	{
@@ -22,9 +23,25 @@ void * udp_handle(void * arg)
 		else
 		{
 			T1 = cJSON_GetObjectItem(json,"T1")->valuedouble;
+				if( T1 == 0x038F )
+					log_file = 0;
+				else if( T1 == 0x0390 )
+					log_file = 0;
 			P1 = cJSON_GetObjectItem(json,"P1")->valuedouble;
+				if( T1 == 0x038F )
+					log_file = 0;
+				else if( T1 == 0x0390 )
+					log_file = 0;
 			T2 = cJSON_GetObjectItem(json,"T2")->valuedouble;
+				if( T1 == 0x038F )
+					log_file = 0;
+				else if( T1 == 0x0390 )
+					log_file = 0;
 			P2 = cJSON_GetObjectItem(json,"P2")->valuedouble;
+				if( T1 == 0x038F )
+					log_file = 0;
+				else if( T1 == 0x0390 )
+					log_file = 0;
 			TStamp = cJSON_GetObjectItem(json,"TStamp")->valuestring;
 			
 			printf("Temperature T1:%f\t",T1);
@@ -36,12 +53,24 @@ void * udp_handle(void * arg)
 		
 		fetch_MFM();	// Fetching Data from MFM
 		
-		fd_log = fopen("../DataBase/Log.csv", "a");
-		if( fd_log < 0 )
-			perror("File Status:");
+		if(log_file )
+		{
+			fd_log = fopen("../DataBase/Log.csv", "a");
+			if( fd_log < 0 )
+				perror("File Status:");
 		
-		fprintf(fd_log,"%s, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n",TStamp, T1, P1, T2, P2, vR, vY, vB, cR, cY, cB, frq, pfR, pfY, pfB);
-		fclose(fd_log);
+			fprintf(fd_log,"%s, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n",TStamp, T1, P1, T2, P2, vR, vY, vB, cR, cY, cB, frq, pfR, pfY, pfB);
+			fclose(fd_log);
+		}
+		else
+		{
+			fd_error_log = fopen("../DataBase/Log.csv", "a");
+			if( fd_error_log < 0 )
+				perror("File Status:");
+		
+			fprintf(fd_error_log,"%s, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n",TStamp, T1, P1, T2, P2, vR, vY, vB, cR, cY, cB, frq, pfR, pfY, pfB);
+			fclose(fd_error_log);
+		}
 		sendto(sockfd, "Message received", 16, 0, (const struct sockaddr*)&cliaddr, len);
 	}
 }
