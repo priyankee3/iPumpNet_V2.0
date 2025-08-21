@@ -24,25 +24,21 @@ void * udp_handle(void * arg)
 		else
 		{
 			T1 = cJSON_GetObjectItem(json,"T1")->valuedouble;
-				if( T1 == 0x038F )
+				if( T1 >= 0x0386 && T1 <= 0x0393 )  
 					log_file = 0;
-				else if( T1 == 0x0390 )
-					log_file = 0;
+					
 			P1 = cJSON_GetObjectItem(json,"P1")->valuedouble;
-				if( T1 == 0x038F )
+				if( P1 >= 0x0386 && P1 <= 0x0393 )  
 					log_file = 0;
-				else if( T1 == 0x0390 )
-					log_file = 0;
+
 			T2 = cJSON_GetObjectItem(json,"T2")->valuedouble;
-				if( T1 == 0x038F )
+				if( T2 >= 0x0386 && T2 <= 0x0393 )  
 					log_file = 0;
-				else if( T1 == 0x0390 )
-					log_file = 0;
+
 			P2 = cJSON_GetObjectItem(json,"P2")->valuedouble;
-				if( T1 == 0x038F )
+				if( P2 >= 0x0386 && P2 <= 0x0393 )  
 					log_file = 0;
-				else if( T1 == 0x0390 )
-					log_file = 0;
+
 			TStamp = cJSON_GetObjectItem(json,"TStamp")->valuestring;
 			
 			printf("Temperature T1:%f\t",T1);
