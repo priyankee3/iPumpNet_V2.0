@@ -9,6 +9,7 @@ void * udp_handle(void * arg)
 	len = sizeof(cliaddr);
 	while(1)
 	{
+		log_file = 1;
 		n = recvfrom(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr *)&cliaddr, &len);
 		buffer[n] = '\0';
 		
