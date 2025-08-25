@@ -46,6 +46,9 @@ void * udp_handle(void * arg)
 			printf("Temperature T2:%f\t",T2);
 			printf("Pressure P2:%f\t",P2);
 			printf("Date & Time:%s\n",TStamp);
+
+			if(TStamp[10] == 'T')
+				TStamp[10] = ' ';
 		}
 		
 		fetch_MFM();	// Fetching Data from MFM

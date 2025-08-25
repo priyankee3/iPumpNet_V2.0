@@ -1,5 +1,5 @@
 #Variable Defination
-CC = cc
+CC = arm-linux-gnueabihf-gcc
 CFLAGS = -Wall -g
 LDFLAGS = -lmodbus -lcjson
 OBJS = main.o modbus_tcp.o udp_server.o
