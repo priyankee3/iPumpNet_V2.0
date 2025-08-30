@@ -5,6 +5,7 @@ FILE *fd_log = NULL;
 // Function to handle the UDP clients
 void * udp_handle(void * arg)	
 {
+	s8 *ip = "192.168.1.158";
 	bool log_file = 1;	// variable to select data will go in which file
 	len = sizeof(cliaddr);
 	while(1)
@@ -15,31 +16,37 @@ void * udp_handle(void * arg)
 		
 		printf("Client: %s\n", buffer);
 		// Paresing the JSON data
-		json = cJSON_Parse(buffer);
-		if( json == NULL )
+		json_receive = cJSON_Parse(buffer);
+		if( json_receive == NULL )
 		{
 			printf("JSON Prasing Status: %s", cJSON_GetErrorPtr());
-			cJSON_Delete(json);
+			cJSON_Delete(json_receive);
 		}
 		else
 		{
-			T1 = cJSON_GetObjectItem(json,"T1")->valuedouble;
+			TStamp = cJSON_GetObjectItem(json_receive,"TStamp")->valuestring;
+			cJSON_AddStringToObject(json_send, "TStamp", TStamp);	
+
+			T1 = cJSON_GetObjectItem(json_receive,"T1")->valuedouble;
 				if( T1 >= 0x0386 && T1 <= 0x0393 )  
 					log_file = 0;
+			cJSON_AddNumberToObject(json_send, "T1", T1);
 					
-			P1 = cJSON_GetObjectItem(json,"P1")->valuedouble;
+			P1 = cJSON_GetObjectItem(json_receive,"P1")->valuedouble;
 				if( P1 >= 0x0386 && P1 <= 0x0393 )  
 					log_file = 0;
+			cJSON_AddNumberToObject(json_send, "P1", P1);
 
-			T2 = cJSON_GetObjectItem(json,"T2")->valuedouble;
+			T2 = cJSON_GetObjectItem(json_receive,"T2")->valuedouble;
 				if( T2 >= 0x0386 && T2 <= 0x0393 )  
 					log_file = 0;
+			cJSON_AddNumberToObject(json_send, "T2", T2);
 
-			P2 = cJSON_GetObjectItem(json,"P2")->valuedouble;
+			P2 = cJSON_GetObjectItem(json_receive,"P2")->valuedouble;
 				if( P2 >= 0x0386 && P2 <= 0x0393 )  
 					log_file = 0;
+			cJSON_AddNumberToObject(json_send, "P2", P2);
 
-			TStamp = cJSON_GetObjectItem(json,"TStamp")->valuestring;
 			
 			printf("Temperature T1:%f\t",T1);
 			printf("Pressure P1:%f\t",P1);
@@ -72,5 +79,11 @@ void * udp_handle(void * arg)
 			fclose(fd_error_log);
 		}
 		sendto(sockfd, "Message received", 16, 0, (const struct sockaddr*)&cliaddr, len);
+
+		// Sending Data to MQTT Broker in JSON format
+		mqtt_publish(ip);
+
+		
+		cJSON_free(json_send);
 	}
 }

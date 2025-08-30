@@ -1,8 +1,8 @@
 #Variable Defination
 CC = cc
 CFLAGS = -Wall -g
-LDFLAGS = -lmodbus -lcjson
-OBJS = main.o modbus_tcp.o udp_server.o
+LDFLAGS = -lmodbus -lcjson -lmosquitto
+OBJS = main.o modbus_tcp.o udp_server.o mqtt_publish.o
 
 #Target and its dependencies
 HMI_Backend: $(OBJS)
@@ -17,6 +17,9 @@ modbus_tcp.o: modbus_tcp.c
 
 udp_server.o: udp_server.c
 	$(CC) $(CFLAGS) -c udp_server.c
+
+mqtt_publish.o: mqtt_publish.c
+	$(CC) $(CFLAGS) -c mqtt_publish.c
 
 #Clean build files
 clean:

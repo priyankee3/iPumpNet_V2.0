@@ -14,7 +14,8 @@ union convert_hex_float hex_float;
 s8 buffer[256];
 s32 sockfd ,  n;
 struct sockaddr_in servaddr, cliaddr;
-cJSON *json = NULL;	//file descriptor for JSON
+cJSON *json_receive = NULL;	//File descriptor for JSON to receive
+cJSON *json_send = NULL;	//File descriptor for JSON to send
 FILE *fd_error_log = NULL;	//file pointer for .csv file
 f32 T1, P1, T2, P2;	// Variables for Temperature 1, 2 and Pressure 1, 2
 s8 *TStamp = NULL;	// Variable for storing Time stamp
@@ -23,6 +24,9 @@ int main()
 {
 	bool write_header = 1;	// Variable to write header or not
 	pthread_t tid;	// for Creating thread and getting thread id
+	
+	/******************** JSON File ********************/
+	json_send = cJSON_CreateObject();	// Creating json object for send JSON file
 	
 	/******************** IP and Port Initialization for communication ********************/
 
@@ -109,7 +113,11 @@ int main()
 	{
 		sleep(1);
 	}
-
+	
+	cJSON_free(json_send);
+	cJSON_free(json_receive);
+	cJSON_Delete(json_send);
+	cJSON_Delete(json_receive);
 	close(sockfd);
 	return 0;
 }

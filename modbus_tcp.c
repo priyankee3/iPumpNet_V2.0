@@ -68,6 +68,7 @@ void fetch_MFM(void)
 		convert_to_F32();
 		printf("VR: %f V\t",hex_float.result);
 		vR = hex_float.result;
+		cJSON_AddNumberToObject(json_send, "VR", vR);
 	}
 
 	// Voltage Yellow
@@ -76,6 +77,7 @@ void fetch_MFM(void)
 		convert_to_F32();
 		printf("VY: %f V\t",hex_float.result);
 		vY = hex_float.result;
+		cJSON_AddNumberToObject(json_send, "VY", vY);
 	}
 
 	// Voltage Green
@@ -84,6 +86,7 @@ void fetch_MFM(void)
 		convert_to_F32();
 		printf("VB: %f V\t",hex_float.result);
 		vB = hex_float.result;
+		cJSON_AddNumberToObject(json_send, "VB", vB);
 	}
 
 	// Current Red
@@ -92,6 +95,7 @@ void fetch_MFM(void)
 		convert_to_F32();
 		printf("CR: %f A\t",hex_float.result);
 		cR = hex_float.result;
+		cJSON_AddNumberToObject(json_send, "CR", cR);
 	}
 
 	// Current Yellow
@@ -100,6 +104,7 @@ void fetch_MFM(void)
 		convert_to_F32();
 		printf("CY: %f A\t",hex_float.result);
 		cY = hex_float.result;
+		cJSON_AddNumberToObject(json_send, "CY", cY);
 	}
 
 	// Current Blue
@@ -108,6 +113,7 @@ void fetch_MFM(void)
 		convert_to_F32();
 		printf("CB: %f A\t",hex_float.result);
 		cB = hex_float.result;
+		cJSON_AddNumberToObject(json_send, "CB", cB);
 	}
 
 	printf("\n");
@@ -118,6 +124,7 @@ void fetch_MFM(void)
 		convert_to_F32();
 		printf("PF Red: %f \t", hex_float.result);
 		pfR = hex_float.result;
+		cJSON_AddNumberToObject(json_send, "PFR", pfR);
 	}
 	
 	// Power Factor Yellow
@@ -126,6 +133,7 @@ void fetch_MFM(void)
 		convert_to_F32();
 		printf("PF Yellow: %f \t", hex_float.result);
 		pfY = hex_float.result;
+		cJSON_AddNumberToObject(json_send, "PFY", pfY);
 	}
 	
 	// Power Factor blue
@@ -134,6 +142,7 @@ void fetch_MFM(void)
 		convert_to_F32();
 		printf("PF Blue: %f \t", hex_float.result);
 		pfB = hex_float.result;
+		cJSON_AddNumberToObject(json_send, "PFB", pfB);
 	}
 	
 	// Frequency

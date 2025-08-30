@@ -11,7 +11,8 @@
 #include <sys/socket.h>	// For creating socket
 #include <arpa/inet.h>	// For converting IPs, Port no. to network order
 #include <cjson/cJSON.h>	// For Transmitting and receving data in JSON format  
-#include <pthread.h>	// for thread
+#include <pthread.h>	// For thread
+#include <mosquitto.h>	// For Mosquitto MQTT
 
 // Type definitions
 typedef char s8;
@@ -32,6 +33,9 @@ bool modbus_tcp(const s8 *, s32, s32, u16, u16);	// Fetch data from MFM: IP addr
 bool convert_to_F32(void);	// Function to convert recevied data and store it into float variable
 void fetch_MFM(void);	// Function to fetching values from MFM EMpro
 void * udp_handle(void * arg);	// Function to handle Client on UDP Server	
+void on_connect(struct mosquitto *, void *, int);	// Call back funciton for MQTT
+void on_publish(struct mosquitto *, void *, int);	// Call back function for MQTT
+void mqtt_publish(s8 *);	// Function to send data to MQTT broker send ip address in string 
 
 // Macro
 #define MFM "192.168.1.102"
@@ -58,7 +62,8 @@ extern s8 buffer[256];
 extern s32 sockfd, n;
 extern u32 len;
 extern struct sockaddr_in servaddr, cliaddr;
-extern cJSON *json;	//file descriptor for JSON
+extern cJSON *json_receive;	//File descriptor for JSON to receive
+extern cJSON *json_send;	// File descriptor for JSON to send
 extern union convert_hex_float hex_float;
 extern FILE *fd_log; // file descriptor for no error logs .csv file
 extern FILE *fd_error_log;	// file descriptor for error log .csv file
