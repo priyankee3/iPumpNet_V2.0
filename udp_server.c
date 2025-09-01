@@ -5,7 +5,7 @@ FILE *fd_log = NULL;
 // Function to handle the UDP clients
 void * udp_handle(void * arg)	
 {
-	s8 *ip = "192.168.1.158";
+	s8 *ip = "192.168.1.110";
 	bool log_file = 1;	// variable to select data will go in which file
 	len = sizeof(cliaddr);
 	while(1)
@@ -82,7 +82,6 @@ void * udp_handle(void * arg)
 
 		// Sending Data to MQTT Broker in JSON format
 		mqtt_publish(ip);
-
 		
 		cJSON_free(json_send);
 	}
