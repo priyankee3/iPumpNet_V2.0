@@ -5,9 +5,6 @@ void mqtt_publish(s8 *ip)
 	s32 rc;
 	s8* message = NULL;
 
-	// Required before calling other mosquitto function
-	mosquitto_lib_init();
-
 	/* Create a new client instance
 	   id = NULL -> ask the broker to generate a client id for us
 	   clean session = true -> the broker should remove old sessions when we connect
@@ -58,10 +55,10 @@ void mqtt_publish(s8 *ip)
 		mosquitto_destroy(mosq);
 		fprintf(stderr,"Error: %s\n", mosquitto_strerror(rc));
 	}
-
+	
 	mosquitto_disconnect(mosq);
-	mosquitto_destroy(mosq);
-	mosquitto_lib_cleanup(); 
+
+	sleep(1);
 }
 
 // Callback called when the client receive a CONNACK messafe from the broker

@@ -69,6 +69,7 @@ extern FILE *fd_log; // file descriptor for no error logs .csv file
 extern FILE *fd_error_log;	// file descriptor for error log .csv file
 extern f32 T1, P1, T2, P2, vR, vY, vB, cR, cY, cB, frq, pfR, pfY, pfB;	// Variables for Temperature 1, 2 and Pressure 1, 2 and values from MFM 
 extern s8 *TStamp;	// Variable for storing Time stamp
+extern s8 *ip;
 
 // Variable to Test 
 

@@ -149,9 +149,8 @@ void fetch_MFM(void)
 	if(modbus_tcp(MFM, MFM_PORTNO, 1, FRQ, 4))
 	{
 		convert_to_F32();
-		printf("Frequncy: %f \t", hex_float.result);
+		printf("Frequncy: %f \n", hex_float.result);
 		frq = hex_float.result;
 	}
 
-	// RPM
 }

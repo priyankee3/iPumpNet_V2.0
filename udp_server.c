@@ -2,10 +2,10 @@
 
 u32 len;
 FILE *fd_log = NULL;
+s8 *ip = "192.168.1.159";	// IP for MQTT broker
 // Function to handle the UDP clients
 void * udp_handle(void * arg)	
 {
-	s8 *ip = "192.168.1.110";
 	bool log_file = 1;	// variable to select data will go in which file
 	len = sizeof(cliaddr);
 	while(1)

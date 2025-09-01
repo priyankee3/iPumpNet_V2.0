@@ -60,6 +60,10 @@ int main()
 	
 	pthread_detach(tid);	// no need to Join
 	
+	/******************** MQTT Inialization ********************/
+	// Required before calling other mosquitto function
+	mosquitto_lib_init();
+	
 	/******************** File Inialization for .csv ********************/
 	
 	// For log file
@@ -113,6 +117,10 @@ int main()
 	{
 		sleep(1);
 	}
+	
+	// Closing MQTT
+	mosquitto_lib_cleanup(); 
+	//mosquitto_destroy(mosq);
 	
 	cJSON_free(json_send);
 	cJSON_free(json_receive);
