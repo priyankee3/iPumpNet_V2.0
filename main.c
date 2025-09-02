@@ -85,7 +85,7 @@ int main()
 	
 	if(write_header)
 	{
-		fprintf(fd_log,"TStamp, Temperature 1, Pressure 1, Temperature 2, Pressure 2, Voltage Red, Voltage Yellow, Voltage Blue, Current Red, Current Yellow, Current Blue, Frequency, Power Factor Red, Power Factor Yellow, Power Factor Blue, RPM\n");
+		fprintf(fd_log,"DSN, Project_ID, PumpSet_ID, PumpNo., TStamp, Temperature 1, Pressure 1, Temperature 2, Pressure 2, Voltage Red, Voltage Yellow, Voltage Blue, Current Red, Current Yellow, Current Blue, Frequency, Power Factor Red, Power Factor Yellow, Power Factor Blue, RPM\n");
 		fclose(fd_log);
 	}
 
@@ -108,7 +108,7 @@ int main()
 	
 	if(write_header)
 	{
-		fprintf(fd_log,"TStamp, Temperature 1, Pressure 1, Temperature 2, Pressure 2, Voltage Red, Voltage Yellow, Voltage Blue, Current Red, Current Yellow, Current Blue, Frequency, Power Factor Red, Power Factor Yellow, Power Factor Blue, RPM\n");
+		fprintf(fd_log,"DSN, Project_ID, PumpSet_ID, PumpNo., TStamp, Temperature 1, Pressure 1, Temperature 2, Pressure 2, Voltage Red, Voltage Yellow, Voltage Blue, Current Red, Current Yellow, Current Blue, Frequency, Power Factor Red, Power Factor Yellow, Power Factor Blue, RPM\n");
 		fclose(fd_log);
 	}
 	

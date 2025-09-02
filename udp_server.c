@@ -3,6 +3,11 @@
 u32 len;
 FILE *fd_log = NULL;
 s8 *ip = "192.168.1.159";	// IP for MQTT broker
+s8 *DSN;
+s32 projectID;	// Project ID
+s32 pumpSetID;	// PumpSet ID
+s32 pumpNo;	// Pump Number
+
 // Function to handle the UDP clients
 void * udp_handle(void * arg)	
 {
@@ -24,6 +29,19 @@ void * udp_handle(void * arg)
 		}
 		else
 		{
+
+			DSN = cJSON_GetObjectItem(json_receive,"DSN")->valuestring;
+			cJSON_AddStringToObject(json_send,"DSN", DSN);
+			
+			projectID = (int) cJSON_GetObjectItem(json_receive,"Project_Id")->valuedouble;
+			cJSON_AddNumberToObject(json_send,"Porject_ID", projectID);
+
+			pumpSetID = (int) cJSON_GetObjectItem(json_receive, "PumpSet_Id")->valuedouble;
+			cJSON_AddNumberToObject(json_send, "PumpSet_ID", pumpSetID);
+			
+			pumpNo = (int) cJSON_GetObjectItem(json_receive, "pumpNo")->valuedouble;
+			cJSON_AddNumberToObject(json_send, "PumpNo", pumpNo);
+			
 			TStamp = cJSON_GetObjectItem(json_receive,"TStamp")->valuestring;
 			cJSON_AddStringToObject(json_send, "TStamp", TStamp);	
 
@@ -66,7 +84,7 @@ void * udp_handle(void * arg)
 			if( fd_log < 0 )
 				perror("File Status:");
 		
-			fprintf(fd_log,"%s, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n",TStamp, T1, P1, T2, P2, vR, vY, vB, cR, cY, cB, frq, pfR, pfY, pfB);
+			fprintf(fd_log,"%s, %d, %d, %d, %s, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n", DSN, projectID, pumpSetID, pumpNo, TStamp, T1, P1, T2, P2, vR, vY, vB, cR, cY, cB, frq, pfR, pfY, pfB);
 			fclose(fd_log);
 		}
 		else
@@ -75,7 +93,7 @@ void * udp_handle(void * arg)
 			if( fd_error_log < 0 )
 				perror("File Status:");
 		
-			fprintf(fd_error_log,"%s, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n",TStamp, T1, P1, T2, P2, vR, vY, vB, cR, cY, cB, frq, pfR, pfY, pfB);
+			fprintf(fd_error_log,"%s, %d, %d, %d, %s, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n",DSN, projectID, pumpSetID, pumpNo, TStamp, T1, P1, T2, P2, vR, vY, vB, cR, cY, cB, frq, pfR, pfY, pfB);
 			fclose(fd_error_log);
 		}
 		sendto(sockfd, "Message received", 16, 0, (const struct sockaddr*)&cliaddr, len);
