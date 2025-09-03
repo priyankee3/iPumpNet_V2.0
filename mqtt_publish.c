@@ -39,8 +39,9 @@ void mqtt_publish(s8 *ip)
 	{
 		mosquitto_destroy(mosq);
 		fprintf(stderr,"Error in MQTT: %s\n", mosquitto_strerror(rc));
-	}
-	
+	}	
+
+	free(message);
 	mosquitto_disconnect(mosq);
 	//mosquitto_destroy(mosq);
 	//mosquitto_lib_cleanup();
