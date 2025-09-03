@@ -101,6 +101,6 @@ void * udp_handle(void * arg)
 		log_file = 1;
 
 		// Sending Data to MQTT Broker in JSON format
-		//mqtt_publish(ip);	
+		mqtt_publish(ip);	
 	}
 }
