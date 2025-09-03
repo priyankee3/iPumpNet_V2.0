@@ -57,8 +57,6 @@ void mqtt_publish(s8 *ip)
 	}
 	
 	mosquitto_disconnect(mosq);
-
-	sleep(1);
 }
 
 // Callback called when the client receive a CONNACK messafe from the broker
