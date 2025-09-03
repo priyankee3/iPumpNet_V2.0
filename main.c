@@ -10,6 +10,7 @@
 
 // Extern Variable declaration
 union convert_hex_float hex_float;
+struct mosquitto *mosq;
 
 s8 buffer[256];
 s32 sockfd ,  n;
@@ -24,7 +25,7 @@ int main()
 {
 	bool write_header = 1;	// Variable to write header or not
 	pthread_t tid;	// for Creating thread and getting thread id
-	
+
 	/******************** JSON File ********************/
 	json_send = cJSON_CreateObject();	// Creating json object for send JSON file
 	
@@ -52,6 +53,25 @@ int main()
 
 	printf("UDP server listening on port 10051.....\n");
 	
+	/******************** MQTT Inialization ********************/
+	// Required before calling other mosquitto function
+	mosquitto_lib_init();
+	
+	/* Create a new client instance
+	   id = NULL -> ask the broker to generate a client id for us
+	   clean session = true -> the broker should remove old sessions when we connect
+	   obj = NULL -> we aren't passing any of our private data for call back */
+
+	mosq = mosquitto_new(NULL, true, NULL);
+	if( mosq == NULL )
+	{
+		fprintf(stderr,"Error in MQTT: Out of memory.\n");
+	}
+	
+	// Configure callback. This should be done before connecting ideally
+	mosquitto_connect_callback_set(mosq,on_connect);
+	mosquitto_publish_callback_set(mosq,on_publish);
+	
 	/******************** Thread Initialization ********************/
 	
 	//  Creating Thread for UPD
@@ -59,11 +79,7 @@ int main()
 		close(sockfd);
 	
 	pthread_detach(tid);	// no need to Join
-	
-	/******************** MQTT Inialization ********************/
-	// Required before calling other mosquitto function
-	mosquitto_lib_init();
-	
+		
 	/******************** File Inialization for .csv ********************/
 	
 	// For log file
@@ -120,7 +136,7 @@ int main()
 	
 	// Closing MQTT
 	mosquitto_lib_cleanup(); 
-	//mosquitto_destroy(mosq);
+	mosquitto_destroy(mosq);
 	
 	cJSON_Delete(json_send);
 	cJSON_Delete(json_receive);

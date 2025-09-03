@@ -74,6 +74,7 @@ extern s8 *DSN;
 extern s32 projectID;	// Project ID
 extern s32 pumpSetID;	// PumpSet ID
 extern s32 pumpNo;	// Pump Number
+extern struct mosquitto *mosq;	// For MQTT Protocol
 
 // Variable to Test 
 
