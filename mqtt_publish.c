@@ -1,28 +1,8 @@
 #include"header.h"
-void mqtt_publish(s8 *ip)
+bool mqtt_publish(s8 *ip)
 {
 	s32 rc;
-	s8* message = NULL;
-		
-	/* Connect to Broker on port 1883, with a keepalive of 60 seconds.
-	   This call make the socket connection only, it does not complete
-	   the MQTT CONNECT/CONNACK flow, you should use mosquitto_loop_start()
-	   or mosquitto_loop_forever() for processing net traffic */
-	rc = mosquitto_connect(mosq, ip, 1883, 60);
-	if(rc != MOSQ_ERR_SUCCESS)
-	{
-		mosquitto_destroy(mosq);
-		fprintf(stderr,"Error in MQTT: %s\n", mosquitto_strerror(rc));
-	}
-
-	// Runs network loop in a background thread, this calls returns quicky
-	rc = mosquitto_loop_start(mosq);
-	if(rc != MOSQ_ERR_SUCCESS)
-	{
-		mosquitto_destroy(mosq);
-		fprintf(stderr,"Error in MQTT: %s\n", mosquitto_strerror(rc));
-	}
-	
+	s8* message = NULL;	
 	
 	/* Publish Message 
 	   mosq - our client instance
@@ -37,14 +17,17 @@ void mqtt_publish(s8 *ip)
 	rc = mosquitto_publish(mosq,NULL, "THD/Data", strlen(message), message, 0, false );
 	if(rc != MOSQ_ERR_SUCCESS)
 	{
-		mosquitto_destroy(mosq);
+		//mosquitto_destroy(mosq);
 		fprintf(stderr,"Error in MQTT: %s\n", mosquitto_strerror(rc));
+		free(message);
+		return 0;
 	}	
 
 	free(message);
-	mosquitto_disconnect(mosq);
+	//mosquitto_disconnect(mosq);
 	//mosquitto_destroy(mosq);
 	//mosquitto_lib_cleanup();
+	return 1;
 }
 
 // Callback called when the client receive a CONNACK messafe from the broker

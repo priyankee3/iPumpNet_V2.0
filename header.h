@@ -35,7 +35,7 @@ void fetch_MFM(void);	// Function to fetching values from MFM EMpro
 void * udp_handle(void * arg);	// Function to handle Client on UDP Server	
 void on_connect(struct mosquitto *, void *, int);	// Call back funciton for MQTT
 void on_publish(struct mosquitto *, void *, int);	// Call back function for MQTT
-void mqtt_publish(s8 *);	// Function to send data to MQTT broker send ip address in string 
+bool mqtt_publish(s8 *);	// Function to send data to MQTT broker send ip address in string 
 
 // Macro
 #define MFM "192.168.2.102"

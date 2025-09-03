@@ -25,6 +25,7 @@ int main()
 {
 	bool write_header = 1;	// Variable to write header or not
 	pthread_t tid;	// for Creating thread and getting thread id
+	s32 rc;
 
 	/******************** JSON File ********************/
 	json_send = cJSON_CreateObject();	// Creating json object for send JSON file
@@ -71,6 +72,28 @@ int main()
 	// Configure callback. This should be done before connecting ideally
 	mosquitto_connect_callback_set(mosq,on_connect);
 	mosquitto_publish_callback_set(mosq,on_publish);
+	
+	/* Connect to Broker on port 1883, with a keepalive of 60 seconds.
+	   This call make the socket connection only, it does not complete
+	   the MQTT CONNECT/CONNACK flow, you should use mosquitto_loop_start()
+	   or mosquitto_loop_forever() for processing net traffic */
+	rc = mosquitto_connect(mosq, ip, 1883, 60);
+	if(rc != MOSQ_ERR_SUCCESS)
+	{
+		//mosquitto_destroy(mosq);
+		fprintf(stderr,"Error in MQTT: %s\n", mosquitto_strerror(rc));
+		return 0;
+	}
+
+	// Runs network loop in a background thread, this calls returns quicky
+	rc = mosquitto_loop_start(mosq);
+	if(rc != MOSQ_ERR_SUCCESS)
+	{
+		printf("ok in publish\n");
+		//mosquitto_destroy(mosq);
+		fprintf(stderr,"Error in MQTT: %s\n", mosquitto_strerror(rc));
+		return 0;
+	}
 	
 	/******************** Thread Initialization ********************/
 	
