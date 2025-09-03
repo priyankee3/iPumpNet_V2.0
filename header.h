@@ -38,7 +38,7 @@ void on_publish(struct mosquitto *, void *, int);	// Call back function for MQTT
 void mqtt_publish(s8 *);	// Function to send data to MQTT broker send ip address in string 
 
 // Macro
-#define MFM "192.168.1.102"
+#define MFM "192.168.2.102"
 #define MFM_PORTNO 502
 #define VR 0x8006
 #define VY 0x8008

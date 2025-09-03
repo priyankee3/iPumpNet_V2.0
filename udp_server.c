@@ -2,7 +2,7 @@
 
 u32 len;
 FILE *fd_log = NULL;
-s8 *ip = "192.168.1.159";	// IP for MQTT broker
+s8 *ip = "192.168.2.121";	// IP for MQTT broker
 s8 *DSN;
 s32 projectID;	// Project ID
 s32 pumpSetID;	// PumpSet ID
@@ -24,7 +24,7 @@ void * udp_handle(void * arg)
 		json_receive = cJSON_Parse(buffer);
 		if( json_receive == NULL )
 		{
-			printf("JSON Prasing Status: %s", cJSON_GetErrorPtr());
+			printf("JSON Prasing Status: %s\n", cJSON_GetErrorPtr());
 			cJSON_Delete(json_receive);
 		}
 		else
@@ -76,7 +76,7 @@ void * udp_handle(void * arg)
 				TStamp[10] = ' ';
 		}
 		
-		fetch_MFM();	// Fetching Data from MFM
+		//fetch_MFM();	// Fetching Data from MFM
 		
 		if(log_file )
 		{
@@ -99,8 +99,6 @@ void * udp_handle(void * arg)
 		sendto(sockfd, "Message received", 16, 0, (const struct sockaddr*)&cliaddr, len);
 
 		// Sending Data to MQTT Broker in JSON format
-		mqtt_publish(ip);
-		
-		cJSON_free(json_send);
+		//mqtt_publish(ip);	
 	}
 }

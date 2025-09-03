@@ -41,7 +41,7 @@ int main()
 	// Binding server with information
 	servaddr.sin_family = AF_INET;
 	//servaddr.sin_addr.s_addr = INADDR_ANY;	// For any IP of system
-	servaddr.sin_addr.s_addr = inet_addr("192.168.1.120");	// For any IP of system
+	servaddr.sin_addr.s_addr = inet_addr("192.168.2.120");	// For any IP of system
 	servaddr.sin_port = htons(10051);
 
 	if(bind( sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) < 0)
@@ -122,8 +122,6 @@ int main()
 	mosquitto_lib_cleanup(); 
 	//mosquitto_destroy(mosq);
 	
-	cJSON_free(json_send);
-	cJSON_free(json_receive);
 	cJSON_Delete(json_send);
 	cJSON_Delete(json_receive);
 	close(sockfd);
