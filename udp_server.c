@@ -25,7 +25,7 @@ void * udp_handle(void * arg)
 		if( json_receive == NULL )
 		{
 			printf("JSON Prasing Status: %s\n", cJSON_GetErrorPtr());
-			cJSON_Delete(json_receive);
+			//cJSON_Delete(json_receive);
 		}
 		else
 		{
@@ -97,6 +97,8 @@ void * udp_handle(void * arg)
 			fclose(fd_error_log);
 		}
 		sendto(sockfd, "Message received", 16, 0, (const struct sockaddr*)&cliaddr, len);
+		
+		log_file = 1;
 
 		// Sending Data to MQTT Broker in JSON format
 		//mqtt_publish(ip);	
