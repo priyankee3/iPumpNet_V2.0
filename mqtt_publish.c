@@ -23,6 +23,8 @@ bool mqtt_publish(s8 *ip)
 	mosquitto_connect_callback_set(mosq,on_connect);
 	mosquitto_publish_callback_set(mosq,on_publish);
 	
+	mosquitto_username_pw_set( mosq, "ee3", "Pump@2021" );
+	
 	/* Connect to Broker on port 1883, with a keepalive of 60 seconds.
 	   This call make the socket connection only, it does not complete
 	   the MQTT CONNECT/CONNACK flow, you should use mosquitto_loop_start()
