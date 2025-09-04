@@ -34,7 +34,7 @@ void * udp_handle(void * arg)
 			cJSON_AddStringToObject(json_send,"DSN", DSN);
 			
 			projectID = (int) cJSON_GetObjectItem(json_receive,"Project_Id")->valuedouble;
-			cJSON_AddNumberToObject(json_send,"Porject_ID", projectID);
+			cJSON_AddNumberToObject(json_send,"Project_ID", projectID);
 
 			pumpSetID = (int) cJSON_GetObjectItem(json_receive, "PumpSet_Id")->valuedouble;
 			cJSON_AddNumberToObject(json_send, "PumpSet_ID", pumpSetID);
