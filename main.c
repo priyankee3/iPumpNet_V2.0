@@ -115,7 +115,6 @@ int main()
 		sleep(1);
 	}
 	
-	
 	cJSON_Delete(json_send);
 	cJSON_Delete(json_receive);
 	close(sockfd);
