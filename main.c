@@ -25,7 +25,6 @@ int main()
 {
 	bool write_header = 1;	// Variable to write header or not
 	pthread_t tid;	// for Creating thread and getting thread id
-	s32 rc;
 
 	/******************** JSON File ********************/
 	json_send = cJSON_CreateObject();	// Creating json object for send JSON file
@@ -53,47 +52,6 @@ int main()
 	}
 
 	printf("UDP server listening on port 10051.....\n");
-	
-	/******************** MQTT Inialization ********************/
-	// Required before calling other mosquitto function
-	mosquitto_lib_init();
-	
-	/* Create a new client instance
-	   id = NULL -> ask the broker to generate a client id for us
-	   clean session = true -> the broker should remove old sessions when we connect
-	   obj = NULL -> we aren't passing any of our private data for call back */
-
-	mosq = mosquitto_new(NULL, true, NULL);
-	if( mosq == NULL )
-	{
-		fprintf(stderr,"Error in MQTT: Out of memory.\n");
-	}
-	
-	// Configure callback. This should be done before connecting ideally
-	mosquitto_connect_callback_set(mosq,on_connect);
-	mosquitto_publish_callback_set(mosq,on_publish);
-	
-	/* Connect to Broker on port 1883, with a keepalive of 60 seconds.
-	   This call make the socket connection only, it does not complete
-	   the MQTT CONNECT/CONNACK flow, you should use mosquitto_loop_start()
-	   or mosquitto_loop_forever() for processing net traffic */
-	rc = mosquitto_connect(mosq, ip, 1883, 60);
-	if(rc != MOSQ_ERR_SUCCESS)
-	{
-		//mosquitto_destroy(mosq);
-		fprintf(stderr,"Error in MQTT: %s\n", mosquitto_strerror(rc));
-		return 0;
-	}
-
-	// Runs network loop in a background thread, this calls returns quicky
-	rc = mosquitto_loop_start(mosq);
-	if(rc != MOSQ_ERR_SUCCESS)
-	{
-		printf("ok in publish\n");
-		//mosquitto_destroy(mosq);
-		fprintf(stderr,"Error in MQTT: %s\n", mosquitto_strerror(rc));
-		return 0;
-	}
 	
 	/******************** Thread Initialization ********************/
 	
@@ -157,9 +115,6 @@ int main()
 		sleep(1);
 	}
 	
-	// Closing MQTT
-	mosquitto_lib_cleanup(); 
-	mosquitto_destroy(mosq);
 	
 	cJSON_Delete(json_send);
 	cJSON_Delete(json_receive);
