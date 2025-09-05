@@ -15,6 +15,9 @@ void * udp_handle(void * arg)
 	len = sizeof(cliaddr);
 	while(1)
 	{
+		/******************** JSON File ********************/
+		json_send = cJSON_CreateObject();	// Creating json object for send JSON file
+		
 		log_file = 1;
 		n = recvfrom(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr *)&cliaddr, &len);
 		buffer[n] = '\0';
@@ -102,5 +105,7 @@ void * udp_handle(void * arg)
 
 		// Sending Data to MQTT Broker in JSON format
 		mqtt_publish(ip);	
+		
+		cJSON_Delete(json_send);
 	}
 }

@@ -27,9 +27,6 @@ int main()
 	bool write_header = 1;	// Variable to write header or not
 	pthread_t tid;	// for Creating thread and getting thread id
 
-	/******************** JSON File ********************/
-	json_send = cJSON_CreateObject();	// Creating json object for send JSON file
-	
 	/******************** IP and Port Initialization for communication ********************/
 
 	// Create Socket
@@ -170,7 +167,6 @@ int main()
 	mosquitto_destroy(mosq);
 	mosquitto_lib_cleanup();
 	
-	cJSON_Delete(json_send);
 	cJSON_Delete(json_receive);
 	close(sockfd);
 	return 0;
