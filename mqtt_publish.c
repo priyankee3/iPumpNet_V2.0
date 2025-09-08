@@ -42,3 +42,15 @@ void on_publish(struct mosquitto *mosq, void *obj, int mid)
 {
 	printf("Message with the mid %d has been published.\n", mid);
 }
+
+/* Callback when disconnected */
+void on_disconnect( struct mosquitto *mosq, void *obj, int rc )
+{
+	printf("Disconnected from broker: %s\n", mosquitto_strerror(rc));
+
+	if( rc != 0 )
+	{
+		printf("Trying to reconnect...\n");
+		mosquitto_reconnect_async(mosq);
+	}
+}

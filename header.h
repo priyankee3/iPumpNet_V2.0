@@ -36,6 +36,7 @@ void * udp_handle(void * arg);	// Function to handle Client on UDP Server
 void on_connect(struct mosquitto *, void *, int);	// Call back funciton for MQTT
 void on_publish(struct mosquitto *, void *, int);	// Call back function for MQTT
 bool mqtt_publish(s8 *);	// Function to send data to MQTT broker send ip address in string 
+void on_disconnect( struct mosquitto *, void *, int );	//Callback on disconnect 
 
 // Macro
 #define MFM "192.168.2.102"

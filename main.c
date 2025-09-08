@@ -69,7 +69,11 @@ int main()
 	// Configure callback. This should be done before connecting ideally
 	mosquitto_connect_callback_set(mosq,on_connect);
 	mosquitto_publish_callback_set(mosq,on_publish);
+	mosquitto_disconnect_callback_set(mosq, on_disconnect);
 	
+	// Enable automatic reconnect with backoff
+	mosquitto_reconnect_delay_set(mosq, 2, 30, true);
+
 	mosquitto_username_pw_set( mosq, "ee3", "Pump@2021" );
 	/* Connect to Broker on port 1883, with a keepalive of 60 seconds.
 	   This call make the socket connection only, it does not complete
