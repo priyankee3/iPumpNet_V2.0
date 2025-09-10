@@ -88,14 +88,14 @@ int main()
 	}
 
 	// Runs network loop in a background thread, this calls returns quicky
-	/*rc = mosquitto_loop_start(mosq);
+	rc = mosquitto_loop_start(mosq);
 	if(rc != MOSQ_ERR_SUCCESS)
 	{
 		printf("ok in publish\n");
 		//mosquitto_destroy(mosq);
 		fprintf(stderr,"Error in MQTT: %s\n", mosquitto_strerror(rc));
 		return 0;
-	}*/
+	}
 	
 	/* Publish Message 
 	   mosq - our client instance

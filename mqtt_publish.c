@@ -1,10 +1,16 @@
 #include"header.h"
+static bool is_connected = false;
 bool mqtt_publish(s8 *ip)
 {
 	s32 rc;
-	s8* message = NULL;	
-	
-	
+	s8* message = NULL;
+
+	if( is_connected == false )
+	{
+		printf("Not connected, Skipping this publish\n");
+		return 0;
+	}
+
 	message = cJSON_Print(json_send);
 
 	rc = mosquitto_publish(mosq,NULL, "THD/Data", strlen(message), message, 0, false );
@@ -32,6 +38,8 @@ void on_connect(struct mosquitto *mosq, void *obj, int reason_code)
 		   client will attempt to reconnect */
 		mosquitto_disconnect(mosq);
 	}
+	else if( reason_code == 0 )
+		is_connected = true;
 }
 
 /* Callback called when the client knows to the best of its abilites that PUBLISH
@@ -47,6 +55,8 @@ void on_publish(struct mosquitto *mosq, void *obj, int mid)
 void on_disconnect( struct mosquitto *mosq, void *obj, int rc )
 {
 	printf("Disconnected from broker: %s\n", mosquitto_strerror(rc));
+	
+	is_connected = false;
 
 	if( rc != 0 )
 	{
