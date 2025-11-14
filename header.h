@@ -33,6 +33,7 @@ bool modbus_tcp(const s8 *, s32, s32, u16, u16);	// Fetch data from MFM: IP addr
 bool convert_to_F32(void);	// Function to convert recevied data and store it into float variable
 void fetch_MFM(void);	// Function to fetching values from MFM EMpro
 void * udp_handle(void * arg);	// Function to handle Client on UDP Server	
+void * tcp_handler(void * arg);	// Function to handle Client on TCP Server	
 void on_connect(struct mosquitto *, void *, int);	// Call back funciton for MQTT
 void on_publish(struct mosquitto *, void *, int);	// Call back function for MQTT
 bool mqtt_publish(s8 *);	// Function to send data to MQTT broker send ip address in string 

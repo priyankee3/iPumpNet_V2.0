@@ -10,7 +10,8 @@ bool mqtt_publish(s8 *ip)
 		printf("Not connected, Skipping this publish\n");
 		return 0;
 	}
-
+	
+	// Copying JSON frame to send to MQTT broker
 	message = cJSON_Print(json_send);
 
 	rc = mosquitto_publish(mosq,NULL, "THD/Data", strlen(message), message, 0, false );
