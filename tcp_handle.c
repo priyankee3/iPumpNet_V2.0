@@ -2,7 +2,7 @@
 
 u32 len;
 FILE *fd_log = NULL;
-s8 *ip = "192.168.2.121";	// IP for MQTT broker
+s8 *ip = "192.168.2.11";	// IP for MQTT broker
 s8 *DSN;
 s32 projectID;	// Project ID
 s32 pumpSetID;	// PumpSet ID
