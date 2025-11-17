@@ -14,8 +14,6 @@ void * tcp_handler(void * arg)
 	bool log_file = 1;	// variable to select data will go in which file
 	len = sizeof(cliaddr);
 	int connfd = *(int*)arg;
-	printf("okay\n");
-    	free(arg);
 	while(1)
 	{
 		/******************** JSON File ********************/
