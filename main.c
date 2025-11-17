@@ -214,7 +214,6 @@ int main()
 			close(sockfd);
 
 		pthread_detach(tid);	// no need to Join*/
-
 		sleep(1);
 	}
 

@@ -15,7 +15,7 @@ void * tcp_handler(void * arg)
 	len = sizeof(cliaddr);
 	int connfd = *(int*)arg;
 	printf("okay\n");
-    	free(arg);
+    	//free(arg);
 	while(1)
 	{
 		/******************** JSON File ********************/
