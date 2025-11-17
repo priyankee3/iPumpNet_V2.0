@@ -222,6 +222,6 @@ int main()
 	mosquitto_lib_cleanup();
 
 	cJSON_Delete(json_receive);
-	close(sockfd);
+	//close(sockfd);
 	return 0;
 }
