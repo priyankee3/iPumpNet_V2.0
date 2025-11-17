@@ -106,7 +106,7 @@ void * tcp_handler(void * arg)
 
 		// Sending Data to MQTT Broker in JSON format
 		mqtt_publish(ip);	
-		
+		cJSON_Delete(json_receive);	
 		cJSON_Delete(json_send);
 	}
 }
