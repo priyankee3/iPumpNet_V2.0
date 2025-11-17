@@ -205,6 +205,7 @@ int main()
 		if( connfd < 0 )
 		{
 			perror("Accept failed");
+			continue;
 		}
 		printf("Client Connected: %s:%d\n", inet_ntoa(cliaddr.sin_addr),ntohs(cliaddr.sin_port));
 
