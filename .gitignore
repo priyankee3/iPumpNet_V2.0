@@ -32,13 +32,13 @@
 *.so.*
 *.dylib
 
-# Executables
+### Executables
 *.exe
 *.out
 *.app
 *.i*86
 *.x86_64
-*.hex 
+*.hex ###
 
 # Debug files
 *.dSYM/
